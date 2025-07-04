@@ -1,59 +1,113 @@
-import Link from "next/link";
-import Image from 'next/image';
+'use client'
 
+import Link from 'next/link'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-white/80 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
-    <div className="px-4">
-      <div className="flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex shrink-0">
-          <Link href="/" className="flex items-center" aria-current="page">
-            <Image
-              src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-              alt="Logo"
-              width={28}
-              height={28}
-            />
-            <p className="sr-only">Website Title</p>
-          </Link>
-        </div>
+  const [isOpen, setIsOpen] = useState(false)
 
-        {/* Middle Nav Links */}
-        <div className="hidden md:flex md:items-center md:justify-center md:gap-5">
+  return (
+    <header className="fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-white/80 dark:bg-gray-900 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
+      <div className="px-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex shrink-0">
+          <Link href="/" className="flex items-center">
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  className="w-7 h-7 text-blue-600 dark:text-white fill-current"
+>
+  <g>
+    <polygon points="231.266,471.531 220.953,512 293.141,512 282.828,471.531" />
+    <polygon points="91.016,471.531 80.703,512 133.156,512 122.844,471.531" />
+    <polygon points="389.156,471.531 378.844,512 431.297,512 420.984,471.531" />
+    <path d="M405.078,106.438c-13.156,0-31.75,22.156-31.75,37.281v188.766c-9.25-6.859-18.438-14.266-26.547-22.922V114.734C346.781,68.188,294.203,0,257.047,0c-37.172,0-89.75,68.188-89.75,114.734v194.828c-8.719,9.313-18.688,17.172-28.625,24.469V143.719c0-15.125-18.609-37.281-31.734-37.281c-13.156,0-31.75,22.156-31.75,37.281v311.984h63.484v-22.344h28.625v29.531h179.484v-29.531h26.547v22.344h63.484V143.719C436.813,128.594,418.203,106.438,405.078,106.438z M387.344,414.188H126.75c-13.125,0-14.328-37.75,13.984-58.031c33.391-23.891,73.375-53.484,73.375-117.203c0-29.594,0-44.391,0-71.703c0-22.625,19.219-55.75,42.938-55.75c23.703,0,42.922,33.125,42.922,55.75c0,27.313,0,42.109,0,71.703c0,63.719,39.984,93.313,73.375,117.203C401.656,376.438,400.453,414.188,387.344,414.188z" />
+    <path d="M282.078,203.719c0,8.703-50.078,8.703-50.078,0c0-8.688,11.219-15.719,25.047-15.719S282.078,195.031,282.078,203.719z" />
+    <path d="M209.906,374.25c0,10.594-8.578,19.156-19.172,19.156c-10.578,0-19.156-8.563-19.156-19.156s8.578-19.156,19.156-19.156C201.328,355.094,209.906,363.656,209.906,374.25z" />
+  </g>
+</svg>
+
+  <span className="ml-2 font-semibold text-gray-900 dark:text-white">Apolo</span>
+</Link>
+
+          </div>
+
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex md:items-center md:justify-center md:gap-5">
+            <Link
+              href="#"
+              className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
+            >
+              Nosotros
+            </Link>
+            <Link
+              href="#"
+              className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
+            >
+              Servicios
+            </Link>
+          </div>
+
+          {/* Auth Buttons - Desktop */}
+          <div className="hidden sm:flex items-center justify-end gap-3">
+            <Link
+              href="/register"
+              className="text-sm font-semibold text-gray-900 dark:text-white px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/login"
+              className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md"
+            >
+              Login
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-700 dark:text-white focus:outline-none"
+              aria-label="Toggle Menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden mt-3 px-4 pb-4 space-y-3">
           <Link
             href="#"
-            className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-            aria-current="page"
+            className="block text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600"
           >
             Nosotros
           </Link>
           <Link
             href="#"
-            className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
+            className="block text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600"
           >
-           Servicios
+            Servicios
           </Link>
-        </div>
-
-        {/* Right-side Auth Buttons */}
-        <div className="flex items-center justify-end gap-3">
           <Link
             href="/register"
-            className="hidden sm:inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50"
+            className="block text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600"
           >
             Sign in
           </Link>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            className="block bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-md text-center"
           >
             Login
           </Link>
         </div>
-      </div>
-    </div>
-  </header>
+      )}
+    </header>
   )
 }
