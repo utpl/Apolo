@@ -1,6 +1,7 @@
 import { Navbar } from "@/components";
 import Link from "next/link";
 import AboutPage from "./(general)/about/page";
+import Footer from "@/components/footer/footer";
 
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
           <AboutPage />
 
           {/* Enlace a About como página independiente si quieres */}
-          <div className="mt-2">
+          <div className="mt-10">
             <Link
               href="/about"
               className="text-teal-300 underline hover:text-teal-200 transition"
@@ -26,10 +27,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer opcional */}
-      <footer className="text-center text-sm text-gray-500 py-4">
-        © {new Date().getFullYear()} Apolo — Todos los derechos reservados.
-      </footer>
+     <Footer />
     </div>
   )
 }
